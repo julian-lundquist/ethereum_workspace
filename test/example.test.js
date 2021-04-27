@@ -16,12 +16,12 @@ beforeEach(() => {
     car = new Car();
 });
 
-describe('Car', () => {
-    it('can car park', () => {
-        assert.deepStrictEqual(car.park(), 'stopped');
-    });
-
-    it('can drive', () => {
-        assert.deepStrictEqual(car.drive(), 'vroom');
-    });
-});
+// describe('Car', () => {
+//     it('can car park', () => {
+//         assert.deepStrictEqual(car.park(), 'stopped');
+//     });
+//
+//     it('can drive', () => {
+//         assert.deepStrictEqual(car.drive(), 'vroom');
+//     });
+// });

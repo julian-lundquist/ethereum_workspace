@@ -4,13 +4,13 @@ const path = require('path');
 
 const fileName = 'Inbox.sol'
 const inboxPath = path.resolve(__dirname, 'contracts', fileName);
-const data = fs.readFileSync(inboxPath, 'utf8');
+const inboxData = fs.readFileSync(inboxPath, 'utf8');
 
 var input = {
     language: 'Solidity',
     sources: {
-        'content.sol': {
-            content: data
+        'inbox.sol': {
+            content: inboxData
         }
     },
     settings: {
@@ -22,17 +22,14 @@ var input = {
     }
 };
 
-// console.log(solc.compile(JSON.stringify(input)))
 var output = JSON.parse(solc.compile(JSON.stringify(input)));
-console.log(output)
 
 // `output` here contains the JSON output as specified in the documentation
-for (var contractName in output.contracts['content.sol']) {
+for (var contractName in output.contracts['inbox.sol']) {
     console.log(
         contractName +
         ': ' +
-        output.contracts['content.sol'][contractName].evm.bytecode.object
+        output.contracts['inbox.sol'][contractName].evm.bytecode.object
     );
+    module.exports = output.contracts['inbox.sol'][contractName];
 }
-
-module.exports = output;
