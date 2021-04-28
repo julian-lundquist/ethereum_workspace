@@ -22,14 +22,24 @@ var input = {
     }
 };
 
-var output = JSON.parse(solc.compile(JSON.stringify(input)));
+const output = JSON.parse(solc.compile(JSON.stringify(input)));
+// console.log(output.contracts['inbox.sol'].Inbox)
+
+const interface = output.contracts['inbox.sol'].Inbox.abi;
+const bytecode = output.contracts['inbox.sol'].Inbox.evm.bytecode.object;
+
+module.exports = {
+    interface,
+    bytecode,
+};
 
 // `output` here contains the JSON output as specified in the documentation
-for (var contractName in output.contracts['inbox.sol']) {
-    console.log(
-        contractName +
-        ': ' +
-        output.contracts['inbox.sol'][contractName].evm.bytecode.object
-    );
-    module.exports = output.contracts['inbox.sol'][contractName];
-}
+// for (var contractName in output.contracts['inbox.sol']) {
+//     console.log(
+//         contractName +
+//         ': ' +
+//         output.contracts['inbox.sol'][contractName].evm.bytecode.object
+//     );
+//     console.log(output.contracts['inbox.sol'][contractName])
+//     module.exports = output.contracts['inbox.sol'][contractName];
+// }
