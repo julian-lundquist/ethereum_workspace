@@ -22,16 +22,15 @@ const deploy = async () => {
 
     console.log('Attempting to deploy from: ', account.address);
 
-    const myContract = new web3.eth.Contract(interface)
+    const myContract = await new web3.eth.Contract(interface)
 
     // console.log('Private key: ', accounts[0].privateKey)
 
-    const myContractTx = myContract.deploy({
-        data: bytecode,
-        arguments: ['Hi There!']
+    const myContractTx = await myContract.deploy({
+        data: bytecode
     });
 
-    const signPromise = account.signTransaction({
+    const signPromise = await account.signTransaction({
         to: account.address,
         gas: 1500000,
         gasPrice: "20000000000",
@@ -40,18 +39,13 @@ const deploy = async () => {
         hardfork: 'chainstart'
     });
 
-    signPromise.then((signedTx) => {
-        const sentTx = web3.eth.sendSignedTransaction(signedTx.raw || signedTx.rawTransaction);
-        sentTx.on("receipt", receipt => {
-            // do something when receipt comes back
-            console.log(receipt)
-        });
-        sentTx.on("error", err => {
-            // do something on transaction error
-            console.log(err)
-        });
-    }).catch((err) => {
-        // do something when promise fails
+    await web3.eth.sendSignedTransaction(signPromise.raw || signPromise.rawTransaction)
+    .on("receipt", receipt => {
+        // do something when receipt comes back
+        console.log(receipt)
+    })
+    .on("error", err => {
+        // do something on transaction error
         console.log(err)
     });
 

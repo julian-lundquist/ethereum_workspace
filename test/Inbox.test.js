@@ -30,16 +30,16 @@ beforeEach(async () => {
     //     .send({ from: accounts[0], gas: '1000000' });
 });
 
-describe('Inbox', () => {
-    it('deploys a contract', () => {
-        // console.log(inbox)
-        assert.ok(newContract.options.address)
-    });
-
-    it('contains a default message',async () => {
-        // const sendMessage = await myContract['_parent']['methods'].setMessage('abc').send();
-        const message = await newContract.methods.message().call();
-        // assert.deepStrictEqual(message, 'Hi There!')
-        console.log(message)
-    });
-});
+// describe('Inbox', () => {
+//     it('deploys a contract', () => {
+//         // console.log(inbox)
+//         assert.ok(newContract.options.address)
+//     });
+//
+//     it('contains a default message',async () => {
+//         // const sendMessage = await myContract['_parent']['methods'].setMessage('abc').send();
+//         const message = await newContract.methods.message().call();
+//         // assert.deepStrictEqual(message, 'Hi There!')
+//         console.log(message)
+//     });
+// });
